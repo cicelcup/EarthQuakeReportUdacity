@@ -14,7 +14,7 @@
         tools:text="9.5" />
 
     <TextView
-        android:id="@+id/place"
+        android:id="@+id/location"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -31,6 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_margin="16dp"
-        android:layout_toEndOf="@id/place"
+        android:layout_toEndOf="@id/location"
         tools:text="19 de Junio de 2019" />
 </RelativeLayout>

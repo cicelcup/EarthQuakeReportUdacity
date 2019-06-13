@@ -35,8 +35,8 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
         textViewMagnitude.setText(Double.toString(earthQuake.getMagnitude()));
 
         //set the place text
-        TextView textViewPlace = currentView.findViewById(R.id.place);
-        textViewPlace.setText(earthQuake.getPlace());
+        TextView textViewPlace = currentView.findViewById(R.id.location);
+        textViewPlace.setText(earthQuake.getLocation());
 
         //set the date text
         TextView textViewDate = currentView.findViewById(R.id.date);

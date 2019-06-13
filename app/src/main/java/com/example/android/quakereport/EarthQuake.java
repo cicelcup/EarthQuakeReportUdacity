@@ -6,13 +6,13 @@ public class EarthQuake {
     //Magnitude of earthquake
     private double mMagnitude;
     //Place of earthquake
-    private String mPlace;
+    private String mLocation;
     //Date of earthquake
     private String mDate;
 
-    public EarthQuake(double mMagnitude, String mPlace, String mDate) {
+    public EarthQuake(double mMagnitude, String mLocation, String mDate) {
         this.mMagnitude = mMagnitude;
-        this.mPlace = mPlace;
+        this.mLocation = mLocation;
         this.mDate = mDate;
     }
 
@@ -20,8 +20,8 @@ public class EarthQuake {
         return mMagnitude;
     }
 
-    public String getPlace() {
-        return mPlace;
+    public String getLocation() {
+        return mLocation;
     }
 
     public String getDate() {
