@@ -24,7 +24,7 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
         if (currentView == null) {
             //if it's not created, inflate the layout
             currentView = LayoutInflater.from(getContext()).
-                    inflate(R.layout.earthquake_information, parent, false);
+                    inflate(R.layout.earthquake_information_test2, parent, false);
         }
 
         //get the current position from the adapter
