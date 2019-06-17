@@ -38,8 +38,19 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         textViewMagnitude.setText(Double.toString(quake.getMagnitude()));
 
         //set the place text
-        TextView textViewPlace = currentView.findViewById(R.id.location);
-        textViewPlace.setText(quake.getLocation());
+        TextView textViewOffSet = currentView.findViewById(R.id.location_offset);
+        TextView textViewLocation = currentView.findViewById(R.id.location);
+
+        String location = quake.getLocation();
+
+        int positionOf = location.indexOf("of");
+        if (positionOf != -1) {
+            textViewOffSet.setText(location.substring(0, positionOf + 2).trim());
+            textViewLocation.setText(location.substring(positionOf + 2).trim());
+        } else {
+            textViewOffSet.setText("Near the");
+            textViewLocation.setText(location.trim());
+        }
 
         //set the date text
         TextView textViewDate = currentView.findViewById(R.id.date);
