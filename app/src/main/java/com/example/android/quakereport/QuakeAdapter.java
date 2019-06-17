@@ -9,10 +9,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
+public class QuakeAdapter extends ArrayAdapter<Quake> {
 
     //Constructor for the earthquake
-    public EarthQuakeAdapter(Context context, List<EarthQuake> earthQuakeList) {
+    QuakeAdapter(Context context, List<Quake> earthQuakeList) {
         super(context, 0, earthQuakeList);
     }
 
@@ -24,23 +24,23 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
         if (currentView == null) {
             //if it's not created, inflate the layout
             currentView = LayoutInflater.from(getContext()).
-                    inflate(R.layout.earthquake_information_test2, parent, false);
+                    inflate(R.layout.quake_information_test2, parent, false);
         }
 
         //get the current position from the adapter
-        EarthQuake earthQuake = getItem(position);
+        Quake quake = getItem(position);
 
         //Set the magnitude text
         TextView textViewMagnitude = currentView.findViewById(R.id.magnitude);
-        textViewMagnitude.setText(Double.toString(earthQuake.getMagnitude()));
+        textViewMagnitude.setText(Double.toString(quake.getMagnitude()));
 
         //set the place text
         TextView textViewPlace = currentView.findViewById(R.id.location);
-        textViewPlace.setText(earthQuake.getLocation());
+        textViewPlace.setText(quake.getLocation());
 
         //set the date text
         TextView textViewDate = currentView.findViewById(R.id.date);
-        textViewDate.setText(earthQuake.getDate());
+        textViewDate.setText(quake.getDate());
 
         return currentView;
     }

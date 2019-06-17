@@ -2,7 +2,7 @@
 
 package com.example.android.quakereport;
 
-public class EarthQuake {
+class Quake {
     //Magnitude of earthquake
     private double mMagnitude;
     //Place of earthquake
@@ -10,21 +10,23 @@ public class EarthQuake {
     //Date of earthquake
     private String mDate;
 
-    public EarthQuake(double mMagnitude, String mLocation, String mDate) {
+    //Constructor
+    Quake(double mMagnitude, String mLocation, String mDate) {
         this.mMagnitude = mMagnitude;
         this.mLocation = mLocation;
         this.mDate = mDate;
     }
 
-    public double getMagnitude() {
+    //Getters for locals variables
+    double getMagnitude() {
         return mMagnitude;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return mLocation;
     }
 
-    public String getDate() {
+    String getDate() {
         return mDate;
     }
 }
