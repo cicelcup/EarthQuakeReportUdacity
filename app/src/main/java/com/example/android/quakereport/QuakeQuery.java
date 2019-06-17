@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -35,7 +36,9 @@ final class QuakeQuery {
         //Array for the earthQuake
         ArrayList<Quake> arrayOfEarthQuakes = new ArrayList<>();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a",
+                new Locale("ES"));
 
         try {
             JSONObject resultOfQuery = new JSONObject(SAMPLE_JSON_RESPONSE);
