@@ -32,9 +32,9 @@ final class QuakeQuery {
     }
 
 
-    static ArrayList<Quake> extractEarthQuakes() {
+    static ArrayList<Quake> extractQuakes() {
         //Array for the earthQuake
-        ArrayList<Quake> arrayOfEarthQuakes = new ArrayList<>();
+        ArrayList<Quake> arrayOfQuakes = new ArrayList<>();
 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a",
@@ -43,20 +43,19 @@ final class QuakeQuery {
         try {
             JSONObject resultOfQuery = new JSONObject(SAMPLE_JSON_RESPONSE);
 
-            JSONArray earthQuakeList = resultOfQuery.getJSONArray("features");
+            JSONArray quakeList = resultOfQuery.getJSONArray("features");
 
-            for (int i = 0; i < earthQuakeList.length(); i++) {
-                JSONObject oneEarthQuake =
-                        new JSONObject(earthQuakeList.get(i).toString());
-                JSONObject earthQuakeProperties =
-                        new JSONObject(oneEarthQuake.getString("properties"));
+            for (int i = 0; i < quakeList.length(); i++) {
+                JSONObject oneQuake = quakeList.getJSONObject(i);
 
-                arrayOfEarthQuakes.add(new Quake(
-                        Double.valueOf(earthQuakeProperties.getString("mag")),
-                        earthQuakeProperties.getString("place"),
+                JSONObject quakeProperties = oneQuake.getJSONObject("properties");
+
+                arrayOfQuakes.add(new Quake(
+                        Double.valueOf(quakeProperties.getString("mag")),
+                        quakeProperties.getString("place"),
                         dateFormat.format(
                                 new Date(Long.parseLong(
-                                        earthQuakeProperties.getString("time"))))));
+                                        quakeProperties.getString("time"))))));
 
             }
 
@@ -66,7 +65,7 @@ final class QuakeQuery {
         }
 
 
-        return arrayOfEarthQuakes;
+        return arrayOfQuakes;
     }
 
 }

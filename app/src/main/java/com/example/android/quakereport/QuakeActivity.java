@@ -18,7 +18,7 @@ public class QuakeActivity extends AppCompatActivity {
 
         // Create a new QuakeAdapter
         QuakeAdapter adapter = new QuakeAdapter(this,
-                QuakeQuery.extractEarthQuakes());
+                QuakeQuery.extractQuakes());
 
         // Set the adapter
         quakeListView.setAdapter(adapter);
