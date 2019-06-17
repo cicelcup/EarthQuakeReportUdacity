@@ -4,10 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -36,10 +34,10 @@ final class QuakeQuery {
         //Array for the earthQuake
         ArrayList<Quake> arrayOfQuakes = new ArrayList<>();
 
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy hh:mm a",
-                new Locale("ES"));
 
+        /*SimpleDateFormat dateFormat = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy",
+                new Locale("ES"));
+*/
         try {
             JSONObject resultOfQuery = new JSONObject(SAMPLE_JSON_RESPONSE);
 
@@ -51,12 +49,9 @@ final class QuakeQuery {
                 JSONObject quakeProperties = oneQuake.getJSONObject("properties");
 
                 arrayOfQuakes.add(new Quake(
-                        Double.valueOf(quakeProperties.getString("mag")),
+                        quakeProperties.getDouble("mag"),
                         quakeProperties.getString("place"),
-                        dateFormat.format(
-                                new Date(Long.parseLong(
-                                        quakeProperties.getString("time"))))));
-
+                        quakeProperties.getLong("time")));
             }
 
 

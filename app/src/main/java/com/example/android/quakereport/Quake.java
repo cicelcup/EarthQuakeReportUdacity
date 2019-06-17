@@ -8,10 +8,10 @@ class Quake {
     //Place of earthquake
     private String mLocation;
     //Date of earthquake
-    private String mDate;
+    private Long mDate;
 
     //Constructor
-    Quake(double mMagnitude, String mLocation, String mDate) {
+    Quake(double mMagnitude, String mLocation, Long mDate) {
         this.mMagnitude = mMagnitude;
         this.mLocation = mLocation;
         this.mDate = mDate;
@@ -26,7 +26,7 @@ class Quake {
         return mLocation;
     }
 
-    String getDate() {
+    Long getDate() {
         return mDate;
     }
 }
