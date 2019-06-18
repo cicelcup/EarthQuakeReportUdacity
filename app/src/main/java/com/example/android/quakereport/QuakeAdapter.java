@@ -56,23 +56,19 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
     /*Format the magnitude*/
     private String formatMag(float mag) {
-        String floatMagnitude = String.format(
-                Locale.getDefault(), "%.1f", mag);
-        return floatMagnitude;
+        return String.format(Locale.US, "%.1f", mag);
     }
 
     /*format the date*/
     private String formatDate(Long dateQuake) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YYYY");
-        String date = dateFormat.format(new Date(dateQuake));
-        return date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YYYY", Locale.US);
+        return dateFormat.format(new Date(dateQuake));
     }
 
     /*format the time*/
     private String formatTime(Long dateQuake) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
-        String date = dateFormat.format(new Date(dateQuake));
-        return date;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+        return dateFormat.format(new Date(dateQuake));
     }
 
     /*format the location*/

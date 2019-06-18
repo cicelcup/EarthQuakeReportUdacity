@@ -34,10 +34,6 @@ final class QuakeQuery {
         //Array for the earthQuake
         ArrayList<Quake> arrayOfQuakes = new ArrayList<>();
 
-
-        /*SimpleDateFormat dateFormat = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy",
-                new Locale("ES"));
-*/
         try {
             JSONObject resultOfQuery = new JSONObject(SAMPLE_JSON_RESPONSE);
 
