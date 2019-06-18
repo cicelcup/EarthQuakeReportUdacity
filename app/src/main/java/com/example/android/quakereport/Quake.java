@@ -9,12 +9,15 @@ class Quake {
     private String mLocation;
     //Date of earthquake
     private Long mDate;
+    //URl of earthquake
+    private String mUrl;
 
     //Constructor
-    Quake(float mMagnitude, String mLocation, Long mDate) {
+    Quake(float mMagnitude, String mLocation, Long mDate, String mUrl) {
         this.mMagnitude = mMagnitude;
         this.mLocation = mLocation;
         this.mDate = mDate;
+        this.mUrl = mUrl;
     }
 
     //Getters for locals variables
@@ -24,6 +27,10 @@ class Quake {
 
     String getLocation() {
         return mLocation;
+    }
+
+    String getUrl() {
+        return mUrl;
     }
 
     Long getDate() {

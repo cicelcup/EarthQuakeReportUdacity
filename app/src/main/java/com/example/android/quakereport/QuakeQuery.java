@@ -47,7 +47,8 @@ final class QuakeQuery {
                 arrayOfQuakes.add(new Quake(
                         Float.valueOf(quakeProperties.getString("mag")),
                         quakeProperties.getString("place"),
-                        quakeProperties.getLong("time")));
+                        quakeProperties.getLong("time"),
+                        quakeProperties.getString("url")));
             }
 
 
