@@ -49,7 +49,7 @@ final class QuakeQuery {
                 JSONObject quakeProperties = oneQuake.getJSONObject("properties");
 
                 arrayOfQuakes.add(new Quake(
-                        quakeProperties.getDouble("mag"),
+                        Float.valueOf(quakeProperties.getString("mag")),
                         quakeProperties.getString("place"),
                         quakeProperties.getLong("time")));
             }

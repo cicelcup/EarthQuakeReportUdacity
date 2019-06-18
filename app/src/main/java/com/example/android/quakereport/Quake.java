@@ -4,21 +4,21 @@ package com.example.android.quakereport;
 
 class Quake {
     //Magnitude of earthquake
-    private double mMagnitude;
+    private float mMagnitude;
     //Place of earthquake
     private String mLocation;
     //Date of earthquake
     private Long mDate;
 
     //Constructor
-    Quake(double mMagnitude, String mLocation, Long mDate) {
+    Quake(float mMagnitude, String mLocation, Long mDate) {
         this.mMagnitude = mMagnitude;
         this.mLocation = mLocation;
         this.mDate = mDate;
     }
 
     //Getters for locals variables
-    double getMagnitude() {
+    float getMagnitude() {
         return mMagnitude;
     }
 

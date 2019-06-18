@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class QuakeAdapter extends ArrayAdapter<Quake> {
 
@@ -23,7 +24,6 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View currentView = convertView;
 
-
         if (currentView == null) {
             //if it's not created, inflate the layout
             currentView = LayoutInflater.from(getContext()).
@@ -35,34 +35,61 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
         //Set the magnitude text
         TextView textViewMagnitude = currentView.findViewById(R.id.magnitude);
-        textViewMagnitude.setText(Double.toString(quake.getMagnitude()));
+        textViewMagnitude.setText(formatMag(quake.getMagnitude()));
 
         //set the place text
         TextView textViewOffSet = currentView.findViewById(R.id.location_offset);
+        textViewOffSet.setText(formatLocation(quake.getLocation())[0]);
+
         TextView textViewLocation = currentView.findViewById(R.id.location);
-
-        String location = quake.getLocation();
-
-        int positionOf = location.indexOf("of");
-        if (positionOf != -1) {
-            textViewOffSet.setText(location.substring(0, positionOf + 2).trim());
-            textViewLocation.setText(location.substring(positionOf + 2).trim());
-        } else {
-            textViewOffSet.setText("Near the");
-            textViewLocation.setText(location.trim());
-        }
+        textViewLocation.setText(formatLocation(quake.getLocation())[1]);
 
         //set the date text
         TextView textViewDate = currentView.findViewById(R.id.date);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YYYY");
-        String date = dateFormat.format(new Date(quake.getDate()));
-        textViewDate.setText(date);
+        textViewDate.setText(formatDate(quake.getDate()));
 
         TextView textViewTime = currentView.findViewById(R.id.time);
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("hh:mm a");
-        date = dateFormat2.format(new Date(quake.getDate()));
-        textViewTime.setText(date);
+        textViewTime.setText(formatTime(quake.getDate()));
 
         return currentView;
+    }
+
+    /*Format the magnitude*/
+    private String formatMag(float mag) {
+        String floatMagnitude = String.format(
+                Locale.getDefault(), "%.1f", mag);
+        return floatMagnitude;
+    }
+
+    /*format the date*/
+    private String formatDate(Long dateQuake) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YYYY");
+        String date = dateFormat.format(new Date(dateQuake));
+        return date;
+    }
+
+    /*format the time*/
+    private String formatTime(Long dateQuake) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+        String date = dateFormat.format(new Date(dateQuake));
+        return date;
+    }
+
+    /*format the location*/
+
+    private String[] formatLocation(String location) {
+        final String LOCATION_SEPARATOR = "of";
+
+        String[] textLocation = new String[2];
+        int positionOf = location.indexOf(LOCATION_SEPARATOR);
+
+        if (positionOf != -1) {
+            textLocation[0] = location.substring(0, positionOf + 2).trim();
+            textLocation[1] = location.substring(positionOf + 2).trim();
+        } else {
+            textLocation[0] = "Near the";
+            textLocation[1] = location.trim();
+        }
+        return textLocation;
     }
 }
