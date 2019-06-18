@@ -1,6 +1,7 @@
 package com.example.android.quakereport;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,10 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         TextView textViewMagnitude = currentView.findViewById(R.id.magnitude);
         textViewMagnitude.setText(formatMag(quake.getMagnitude()));
 
+        GradientDrawable magnitudeCircle = (GradientDrawable) textViewMagnitude.getBackground();
+
+        magnitudeCircle.setColor(formatMagColor(quake.getMagnitude()));
+
         //set the place text
         TextView textViewOffSet = currentView.findViewById(R.id.location_offset);
         textViewOffSet.setText(formatLocation(quake.getLocation())[0]);
@@ -52,6 +57,47 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         textViewTime.setText(formatTime(quake.getDate()));
 
         return currentView;
+    }
+
+    //color of background circle
+    private int formatMagColor(float mag) {
+        int minMag = (int) Math.floor(mag);
+        int color;
+
+        switch (minMag) {
+            case 0:
+            case 1:
+                color = getContext().getResources().getColor(R.color.magnitude1);
+                break;
+            case 2:
+                color = getContext().getResources().getColor(R.color.magnitude2);
+                break;
+            case 3:
+                color = getContext().getResources().getColor(R.color.magnitude3);
+                break;
+            case 4:
+                color = getContext().getResources().getColor(R.color.magnitude4);
+                break;
+            case 5:
+                color = getContext().getResources().getColor(R.color.magnitude5);
+                break;
+            case 6:
+                color = getContext().getResources().getColor(R.color.magnitude6);
+                break;
+            case 7:
+                color = getContext().getResources().getColor(R.color.magnitude7);
+                break;
+            case 8:
+                color = getContext().getResources().getColor(R.color.magnitude8);
+                break;
+            case 9:
+                color = getContext().getResources().getColor(R.color.magnitude9);
+                break;
+            default:
+                color = getContext().getResources().getColor(R.color.magnitude10plus);
+                break;
+        }
+        return color;
     }
 
     /*Format the magnitude*/
