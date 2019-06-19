@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class QuakeActivity extends AppCompatActivity {
 
+    //URL for the last 10 earthquake with more than 6 of magnitude
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query" +
                     "?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
@@ -25,7 +26,7 @@ public class QuakeActivity extends AppCompatActivity {
         setContentView(R.layout.quake_list);
 
         QuakeRequest quakeRequest = new QuakeRequest();
-        quakeRequest.execute(USGS_REQUEST_URL);
+        //quakeRequest.execute(USGS_REQUEST_URL);
 
         // Find a reference to the ListView
         ListView quakeListView = findViewById(R.id.quake_list);
@@ -52,10 +53,20 @@ public class QuakeActivity extends AppCompatActivity {
 
     private class QuakeRequest extends AsyncTask<String, Void, ArrayList<Quake>> {
         @Override
+        //Starting the thread
         protected ArrayList<Quake> doInBackground(String... urls) {
-            return null;
+
+            ArrayList<Quake> quakes;
+
+            //Verifying the url is not empty
+            if (urls.length < 1 || urls[0] == null) {
+                return null;
+            }
+            quakes = QuakeUtils.fetchURL(urls[0]);
+            return quakes;
         }
 
+        //after the thread finish to execute
         @Override
         protected void onPostExecute(ArrayList<Quake> quakes) {
             super.onPostExecute(quakes);
