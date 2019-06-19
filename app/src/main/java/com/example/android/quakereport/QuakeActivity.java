@@ -23,7 +23,9 @@ public class QuakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quake_list);
 
+        //Creating the Thread
         QuakeRequest quakeRequest = new QuakeRequest();
+        //Executing the Thread
         //quakeRequest.execute(USGS_REQUEST_URL);
 
         // Find a reference to the ListView
@@ -49,22 +51,25 @@ public class QuakeActivity extends AppCompatActivity {
         });
     }
 
+    /*Inner Class for starting the thread*/
     private class QuakeRequest extends AsyncTask<String, Void, String> {
         @Override
         //Starting the thread
         protected String doInBackground(String... urls) {
 
-            String quakes;
+            String quakes; //String where it would be store the json answer
 
-            //Verifying the url is not empty
+            /*Verifying the url is not empty (checking there's
+             not any error into the creation of the URL)*/
             if (urls.length < 1 || urls[0] == null) {
                 return null;
             }
-            quakes = QuakeUtils.fetchURL(urls[0]);
+
+            quakes = QuakeUtils.fetchURL(urls[0]); //Requesting the information throught http
             return quakes;
         }
 
-        //after the thread finish to execute
+        //after the thread finish to execute execute this process in the UI thread
         @Override
         protected void onPostExecute(String quakes) {
             super.onPostExecute(quakes);

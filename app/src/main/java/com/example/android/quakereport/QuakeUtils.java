@@ -5,26 +5,39 @@ import java.net.URL;
 
 /*Class utility for requesting the connection*/
 public final class QuakeUtils {
-    //Creating the url and searching for it
+
+    //Fetching the json
     public static String fetchURL(String requestURL) {
         //Create Url Object
         URL url = createURL(requestURL);
 
-        String jsonQuakes = "";
+        //making the request
+        String jsonQuakes = makeHttpRequest(url);
 
         return jsonQuakes;
     }
 
-    //Creating the URL
+    //Creating the URL Method
     private static URL createURL(String stringURL) {
+
         URL url = null;
 
-        //Creating the Url Method
+        //Verifying the stringURL is valid
         try {
             url = new URL(stringURL);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return url;
+        return url; //returning the correct URL
+    }
+
+    private static String makeHttpRequest(URL url) {
+        String jsonResponse = "";
+
+        if (url == null) {
+            return jsonResponse;
+        }
+
+        return jsonResponse;
     }
 }
