@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 public class QuakeActivity extends AppCompatActivity {
 
     //URL for the last 10 earthquake with more than 6 of magnitude
@@ -51,12 +49,12 @@ public class QuakeActivity extends AppCompatActivity {
         });
     }
 
-    private class QuakeRequest extends AsyncTask<String, Void, ArrayList<Quake>> {
+    private class QuakeRequest extends AsyncTask<String, Void, String> {
         @Override
         //Starting the thread
-        protected ArrayList<Quake> doInBackground(String... urls) {
+        protected String doInBackground(String... urls) {
 
-            ArrayList<Quake> quakes;
+            String quakes;
 
             //Verifying the url is not empty
             if (urls.length < 1 || urls[0] == null) {
@@ -68,7 +66,7 @@ public class QuakeActivity extends AppCompatActivity {
 
         //after the thread finish to execute
         @Override
-        protected void onPostExecute(ArrayList<Quake> quakes) {
+        protected void onPostExecute(String quakes) {
             super.onPostExecute(quakes);
         }
     }
