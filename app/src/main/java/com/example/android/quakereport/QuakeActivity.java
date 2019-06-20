@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class QuakeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<String> {
@@ -21,7 +22,7 @@ public class QuakeActivity extends AppCompatActivity implements
     //URL for the last 10 earthquake with more than 6 of magnitude
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query" +
-                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
+                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=8&limit=10";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,14 @@ public class QuakeActivity extends AppCompatActivity implements
         loaderManager.initLoader(1, null, this);
     }
 
+
     void updateList(String jsonQuakes) {
+        TextView emptyTextView = findViewById(R.id.empty_view);
+        emptyTextView.setText(R.string.not_quake_found);
+
         // Find a reference to the ListView
         ListView quakeListView = findViewById(R.id.quake_list);
+        quakeListView.setEmptyView(emptyTextView);
 
         // Create a new QuakeAdapter
         final QuakeAdapter adapter = new QuakeAdapter(this,

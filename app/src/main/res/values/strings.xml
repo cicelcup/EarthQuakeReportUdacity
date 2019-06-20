@@ -16,4 +16,5 @@
 <resources>
     <string name="app_name">Quake Report</string>
     <string name="no_open_connection">There is not network connection </string>
+    <string name="not_quake_found">There is not earthquake found it</string>
 </resources>
