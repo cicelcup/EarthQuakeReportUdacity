@@ -3,11 +3,14 @@ package com.example.android.quakereport;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /*Class utility for requesting the connection*/
 final class QuakeUtils {
@@ -22,8 +25,9 @@ final class QuakeUtils {
         //Create Url Object
         URL url = createURL(requestURL);
 
-        //making the request
         String jsonQuakes = null;
+
+        //making the request
 
         try {
             jsonQuakes = makeHttpRequest(url);
@@ -95,7 +99,28 @@ final class QuakeUtils {
         return jsonResponse;
     }
 
-    private static String readFromStream(InputStream inputStream) {
-        return "";
+    private static String readFromStream(InputStream inputStream) throws IOException {
+        //Constructor del String
+        StringBuilder quakeOutput = new StringBuilder();
+
+        //If inputStream is different of null
+
+        if (inputStream != null) {
+            //Read the stream using UTF-8 format
+            InputStreamReader inputStreamReader = new InputStreamReader(
+                    inputStream, Charset.forName("UTF-8"));
+            //Read the file efficiently
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+
+            String line = reader.readLine();
+
+            while (line != null) {
+                quakeOutput.append(line);
+                line = reader.readLine();
+            }
+
+        }
+        //return the json
+        return quakeOutput.toString();
     }
 }

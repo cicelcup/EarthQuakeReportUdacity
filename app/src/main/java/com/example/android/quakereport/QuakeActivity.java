@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -66,6 +67,8 @@ public class QuakeActivity extends AppCompatActivity {
             }
 
             quakes = QuakeUtils.fetchURL(urls[0]); //Requesting the information throught http
+            Log.i("JAPM", quakes);
+
             return quakes;
         }
 
