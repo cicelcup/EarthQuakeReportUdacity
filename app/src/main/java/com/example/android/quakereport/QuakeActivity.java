@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class QuakeActivity extends AppCompatActivity implements
@@ -22,7 +23,7 @@ public class QuakeActivity extends AppCompatActivity implements
     //URL for the last 10 earthquake with more than 6 of magnitude
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query" +
-                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=8&limit=10";
+                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=3&limit=20";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,13 @@ public class QuakeActivity extends AppCompatActivity implements
 
 
     void updateList(String jsonQuakes) {
+        //Empty View for not found list
         TextView emptyTextView = findViewById(R.id.empty_view);
         emptyTextView.setText(R.string.not_quake_found);
+
+        //Progress Bar
+        ProgressBar progressBar = findViewById(R.id.progress);
+        progressBar.setVisibility(View.GONE);
 
         // Find a reference to the ListView
         ListView quakeListView = findViewById(R.id.quake_list);

@@ -22,7 +22,14 @@ final class QuakeUtils {
 
     //Fetching the json
     static String fetchURL(String requestURL) {
-        //Create Url Object
+
+        /*Just for remember how to stop a thread for seconds
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+*/        //Create Url Object
         URL url = createURL(requestURL);
 
         String jsonQuakes = null;
