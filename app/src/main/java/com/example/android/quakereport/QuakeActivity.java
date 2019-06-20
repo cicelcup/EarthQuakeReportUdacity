@@ -26,7 +26,7 @@ public class QuakeActivity extends AppCompatActivity {
         //Creating the Thread
         QuakeRequest quakeRequest = new QuakeRequest();
         //Executing the Thread
-        //quakeRequest.execute(USGS_REQUEST_URL);
+        quakeRequest.execute(USGS_REQUEST_URL);
 
         // Find a reference to the ListView
         ListView quakeListView = findViewById(R.id.quake_list);
