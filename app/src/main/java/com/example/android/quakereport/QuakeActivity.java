@@ -4,14 +4,18 @@ package com.example.android.quakereport;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class QuakeActivity extends AppCompatActivity {
+public class QuakeActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<String> {
 
 
     //URL for the last 10 earthquake with more than 6 of magnitude
@@ -24,11 +28,8 @@ public class QuakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quake_list);
 
-        //Creating the Thread
-        QuakeRequest quakeRequest = new QuakeRequest();
-        //Executing the Thread
-        quakeRequest.execute(USGS_REQUEST_URL);
-
+        LoaderManager loaderManager = getSupportLoaderManager();
+        loaderManager.initLoader(1, null, this);
     }
 
     void updateList(String jsonQuakes) {
@@ -55,30 +56,19 @@ public class QuakeActivity extends AppCompatActivity {
         });
     }
 
-    /*Inner Class for starting the thread*/
-    private class QuakeRequest extends AsyncTask<String, Void, String> {
-        @Override
-        //Starting the thread
-        protected String doInBackground(String... urls) {
-
-            String quakes; //String where it would be store the json answer
-
-            /*Verifying the url is not empty (checking there's
-             not any error into the creation of the URL)*/
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-
-            quakes = QuakeUtils.fetchURL(urls[0]); //Requesting the information throught http
-
-            return quakes;
-        }
-
-        //after the thread finish to execute execute this process in the UI thread
-        @Override
-        protected void onPostExecute(String quakes) {
-            updateList(quakes);
-        }
+    @NonNull
+    @Override
+    public Loader<String> onCreateLoader(int i, @Nullable Bundle bundle) {
+        return new QuakeLoader(this, USGS_REQUEST_URL);
     }
 
+    @Override
+    public void onLoadFinished(@NonNull Loader<String> loader, String quakeList) {
+        updateList(quakeList);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<String> loader) {
+
+    }
 }
