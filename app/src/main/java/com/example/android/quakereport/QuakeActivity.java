@@ -2,7 +2,10 @@
 
 package com.example.android.quakereport;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,19 +22,27 @@ import android.widget.TextView;
 public class QuakeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<String> {
 
-
     //URL for the last 10 earthquake with more than 6 of magnitude
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query" +
-                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=3&limit=20";
+                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=3&limit=10";
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quake_list);
+        progressBar = findViewById(R.id.progress);
 
-        LoaderManager loaderManager = getSupportLoaderManager();
-        loaderManager.initLoader(1, null, this);
+        if (isNetworkAvailable()) {
+            LoaderManager loaderManager = getSupportLoaderManager();
+            loaderManager.initLoader(1, null, this);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            TextView textView = findViewById(R.id.not_internet);
+            textView.setVisibility(View.VISIBLE);
+        }
+
     }
 
 
@@ -41,7 +52,6 @@ public class QuakeActivity extends AppCompatActivity implements
         emptyTextView.setText(R.string.not_quake_found);
 
         //Progress Bar
-        ProgressBar progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.GONE);
 
         // Find a reference to the ListView
@@ -81,6 +91,14 @@ public class QuakeActivity extends AppCompatActivity implements
 
     @Override
     public void onLoaderReset(@NonNull Loader<String> loader) {
-
     }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
 }
