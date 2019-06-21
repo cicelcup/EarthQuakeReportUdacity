@@ -28,6 +28,12 @@
     <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
     <string name="settings_min_magnitude_default" translatable="false">3</string>
 
+    <!-- Strings For Minimum Earthquakes[CHAR LIMIT=30], label to show to the user, key to
+    identify in the code and default value-->
+    <string name="settings_quake_number_label">Earthquakes Quantity</string>
+    <string name="settings_quake_number_key" translatable="false">quake_number</string>
+    <string name="settings_quake_number_default" translatable="false">10</string>
+
     <!-- Strings For Order-By Preference [CHAR LIMIT=30], label to show to the user, key to identify
      in the code and default value-->
     <string name="settings_order_by_label">Order By</string>

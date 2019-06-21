@@ -123,15 +123,19 @@ public class QuakeActivity extends AppCompatActivity implements
         //order by value
         String orderBy = sharedPreferences.getString(
                 getString(R.string.settings_order_by_key),
-                getString(R.string.settings_order_by_default)
-        );
+                getString(R.string.settings_order_by_default));
+
+        //Quantity value
+        String quakeNumber = sharedPreferences.getString(
+                getString(R.string.settings_quake_number_key),
+                getString(R.string.settings_quake_number_default));
 
         //Creating the URI to search the JSON
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder quakeQuery = baseUri.buildUpon();
 
         quakeQuery.appendQueryParameter("format", "geojson");
-        quakeQuery.appendQueryParameter("limit", "10");
+        quakeQuery.appendQueryParameter("limit", quakeNumber);
         quakeQuery.appendQueryParameter("minmag", minMag);
         quakeQuery.appendQueryParameter("orderby", orderBy);
 

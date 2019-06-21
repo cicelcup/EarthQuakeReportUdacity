@@ -32,6 +32,10 @@ public class SettingsActivity extends AppCompatActivity {
             //Get the preference for order by
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             preferenceSummary(orderBy);
+
+            //Get the number of earthquakes
+            Preference quakeNumber = findPreference(getString(R.string.settings_quake_number_key));
+            preferenceSummary(quakeNumber);
         }
 
         @Override
