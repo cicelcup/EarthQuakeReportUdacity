@@ -108,14 +108,19 @@ public class QuakeActivity extends AppCompatActivity implements
         SharedPreferences sharedPreferences = PreferenceManager.
                 getDefaultSharedPreferences(this);
 
-        String minMag = sharedPreferences.getString("min_magnitude", "3");
+        String minMag = sharedPreferences.getString(
+                getString(R.string.settings_min_magnitude_key),
+                getString(R.string.settings_min_magnitude_default));
 
-        String queryComplement = USGS_REQUEST_URL +
-                "?format=geojson&eventtype=earthquake&orderby=time&minmag=" +
-                minMag +
-                "&limit=10";
+        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
+        Uri.Builder quakeQuery = baseUri.buildUpon();
 
-        return new QuakeLoader(this, queryComplement);
+        quakeQuery.appendQueryParameter("format", "geojson");
+        quakeQuery.appendQueryParameter("limit", "10");
+        quakeQuery.appendQueryParameter("minmag", minMag);
+        quakeQuery.appendQueryParameter("orderby", "time");
+
+        return new QuakeLoader(this, quakeQuery.toString());
     }
 
     //Finish the loader
