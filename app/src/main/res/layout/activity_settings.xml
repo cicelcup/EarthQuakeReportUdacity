@@ -1,3 +1,4 @@
+<!--Fragment to show the settings-->
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:name="com.example.android.quakereport.SettingsActivity$QuakePreferenceFragment"

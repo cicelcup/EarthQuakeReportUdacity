@@ -26,7 +26,7 @@ import android.widget.TextView;
 public class QuakeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<String> {
 
-    //URL for the last 10 earthquake with more than 6 of magnitude
+    //URL for the query
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
@@ -36,6 +36,7 @@ public class QuakeActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quake_list);
+        //progressBar of loading
         progressBar = findViewById(R.id.progress);
 
         //Check if there's internet, else show the not connection text
@@ -53,6 +54,7 @@ public class QuakeActivity extends AppCompatActivity implements
     //creating the option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        //Menu main is a layout created
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -61,7 +63,10 @@ public class QuakeActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        //Check if setting was pressed
         if (id == R.id.actions_settings) {
+            //Open a new activity
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
@@ -74,11 +79,12 @@ public class QuakeActivity extends AppCompatActivity implements
         TextView emptyTextView = findViewById(R.id.empty_view);
         emptyTextView.setText(R.string.not_quake_found);
 
-        //Progress Bar
+        //Progress Bar not visible
         progressBar.setVisibility(View.GONE);
 
         // Find a reference to the ListView
         ListView quakeListView = findViewById(R.id.quake_list);
+        //Set empty view to the list
         quakeListView.setEmptyView(emptyTextView);
 
         // Create a new QuakeAdapter
@@ -105,6 +111,7 @@ public class QuakeActivity extends AppCompatActivity implements
     @NonNull
     @Override
     public Loader<String> onCreateLoader(int i, @Nullable Bundle bundle) {
+        //Getting the preference
         SharedPreferences sharedPreferences = PreferenceManager.
                 getDefaultSharedPreferences(this);
 
@@ -112,6 +119,7 @@ public class QuakeActivity extends AppCompatActivity implements
                 getString(R.string.settings_min_magnitude_key),
                 getString(R.string.settings_min_magnitude_default));
 
+        //Creating the URI to search the JSON
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder quakeQuery = baseUri.buildUpon();
 

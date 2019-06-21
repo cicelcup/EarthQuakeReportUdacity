@@ -38,8 +38,10 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         TextView textViewMagnitude = currentView.findViewById(R.id.magnitude);
         textViewMagnitude.setText(formatMag(quake.getMagnitude()));
 
+        //Circle behind the magnitude
         GradientDrawable magnitudeCircle = (GradientDrawable) textViewMagnitude.getBackground();
 
+        //Check the color of the circle
         magnitudeCircle.setColor(formatMagColor(quake.getMagnitude()));
 
         //set the place text

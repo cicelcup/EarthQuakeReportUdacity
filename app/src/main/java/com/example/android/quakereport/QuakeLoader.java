@@ -22,7 +22,7 @@ public class QuakeLoader extends AsyncTaskLoader<String> {
         if (mUrl == null) {
             return null;
         }
-
+        //Quake utils where is the process of fetching the JSON
         return QuakeUtils.fetchURL(mUrl);
     }
 
