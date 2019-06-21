@@ -115,9 +115,16 @@ public class QuakeActivity extends AppCompatActivity implements
         SharedPreferences sharedPreferences = PreferenceManager.
                 getDefaultSharedPreferences(this);
 
+        //min magnitude value
         String minMag = sharedPreferences.getString(
                 getString(R.string.settings_min_magnitude_key),
                 getString(R.string.settings_min_magnitude_default));
+
+        //order by value
+        String orderBy = sharedPreferences.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
 
         //Creating the URI to search the JSON
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
@@ -126,7 +133,7 @@ public class QuakeActivity extends AppCompatActivity implements
         quakeQuery.appendQueryParameter("format", "geojson");
         quakeQuery.appendQueryParameter("limit", "10");
         quakeQuery.appendQueryParameter("minmag", minMag);
-        quakeQuery.appendQueryParameter("orderby", "time");
+        quakeQuery.appendQueryParameter("orderby", orderBy);
 
         return new QuakeLoader(this, quakeQuery.toString());
     }

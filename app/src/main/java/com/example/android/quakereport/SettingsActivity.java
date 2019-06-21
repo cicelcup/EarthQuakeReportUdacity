@@ -25,9 +25,13 @@ public class SettingsActivity extends AppCompatActivity {
             //Setting the preferences layout
             addPreferencesFromResource(R.xml.settings_main);
 
-            //Get the preference
+            //Get the preference for minMag
             Preference minMag = findPreference(getString(R.string.settings_min_magnitude_key));
             preferenceSummary(minMag);
+
+            //Get the preference for order by
+            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
+            preferenceSummary(orderBy);
         }
 
         @Override
