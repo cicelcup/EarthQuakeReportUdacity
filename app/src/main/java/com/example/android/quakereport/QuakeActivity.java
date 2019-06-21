@@ -4,10 +4,12 @@ package com.example.android.quakereport;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -26,8 +28,8 @@ public class QuakeActivity extends AppCompatActivity implements
 
     //URL for the last 10 earthquake with more than 6 of magnitude
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query" +
-                    "?format=geojson&eventtype=earthquake&orderby=time&minmag=3&limit=10";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query";
+
     ProgressBar progressBar;
 
     @Override
@@ -48,12 +50,14 @@ public class QuakeActivity extends AppCompatActivity implements
 
     }
 
+    //creating the option menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    //open the menu selected
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -101,7 +105,17 @@ public class QuakeActivity extends AppCompatActivity implements
     @NonNull
     @Override
     public Loader<String> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return new QuakeLoader(this, USGS_REQUEST_URL);
+        SharedPreferences sharedPreferences = PreferenceManager.
+                getDefaultSharedPreferences(this);
+
+        String minMag = sharedPreferences.getString("min_magnitude", "3");
+
+        String queryComplement = USGS_REQUEST_URL +
+                "?format=geojson&eventtype=earthquake&orderby=time&minmag=" +
+                minMag +
+                "&limit=10";
+
+        return new QuakeLoader(this, queryComplement);
     }
 
     //Finish the loader
