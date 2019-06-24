@@ -25,6 +25,10 @@ public class SettingsActivity extends AppCompatActivity {
             //Setting the preferences layout
             addPreferencesFromResource(R.xml.settings_main);
 
+            //Get the location preference
+            Preference location = findPreference(getString(R.string.settings_location_key));
+            preferenceSummary(location);
+
             //Get the preference for minMag
             Preference minMag = findPreference(getString(R.string.settings_min_magnitude_key));
             preferenceSummary(minMag);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--settings labels for location-->
+    <string-array name="settings_location_labels">
+        <item>@string/settings_location_allworld_label</item>
+        <item>@string/settings_location_ca_label</item>
+    </string-array>
+
+    <!--settings values for location-->
+    <string-array name="settings_location_values">
+        <item>@string/settings_location_allworld_value</item>
+        <item>@string/settings_location_ca_value</item>
+    </string-array>
+</resources>

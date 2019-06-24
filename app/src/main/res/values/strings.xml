@@ -22,6 +22,13 @@
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Earthquake Settings</string>
 
+
+    <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30], label to show to the user, key to
+    identify in the code and default value-->
+    <string name="settings_location_label">Location</string>
+    <string name="settings_location_key" translatable="false">location</string>
+    <string name="settings_location_default" translatable="false">all world</string>
+
     <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30], label to show to the user, key to
     identify in the code and default value-->
     <string name="settings_min_magnitude_label">Minimum Magnitude</string>
@@ -51,5 +58,13 @@
     <!-- Label for order-by Oldest option [CHAR LIMIT=20], label to show and value -->
     <string name="settings_order_by_oldest_label">Oldest</string>
     <string name="settings_order_by_oldest_value">time-asc</string>
+
+    <!-- Label for location option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_location_ca_label">Central America</string>
+    <string name="settings_location_ca_value" translatable="false">central-america</string>
+
+    <!-- Label for location option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_location_allworld_label">All World</string>
+    <string name="settings_location_allworld_value" translatable="false">all-world</string>
 
 </resources>

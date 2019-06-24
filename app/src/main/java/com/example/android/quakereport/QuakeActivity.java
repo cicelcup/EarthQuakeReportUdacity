@@ -131,6 +131,12 @@ public class QuakeActivity extends AppCompatActivity implements
                 getString(R.string.settings_quake_number_key),
                 getString(R.string.settings_quake_number_default));
 
+        //Location value
+        String quakeLocation = sharedPreferences.getString(
+                getString(R.string.settings_location_key),
+                getString(R.string.settings_location_default)
+        );
+
         //Creating the URI to search the JSON
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder quakeQuery = baseUri.buildUpon();
@@ -139,10 +145,15 @@ public class QuakeActivity extends AppCompatActivity implements
         quakeQuery.appendQueryParameter("limit", quakeNumber);
         quakeQuery.appendQueryParameter("minmag", minMag);
         quakeQuery.appendQueryParameter("orderby", orderBy);
-        //quakeQuery.appendQueryParameter("minlatitude","7.101");
-        //quakeQuery.appendQueryParameter("maxlatitude","18.605");
-        //quakeQuery.appendQueryParameter("minlongitude","-92.285");
-        //quakeQuery.appendQueryParameter("maxlongitude","-77.036");
+
+        if (quakeLocation.equals("central-america")) {
+            quakeQuery.appendQueryParameter("minlatitude", "7.101");
+            quakeQuery.appendQueryParameter("maxlatitude", "18.605");
+            quakeQuery.appendQueryParameter("minlongitude", "-92.285");
+            quakeQuery.appendQueryParameter("maxlongitude", "-77.036");
+        }
+
+
         //quakeQuery.appendQueryParameter("starttime","2018-01-01");
         //quakeQuery.appendQueryParameter("endtime","2018-12-31");
 
