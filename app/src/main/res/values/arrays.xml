@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--Arrays to show in the menu options-->
 <resources>
     <!--settings labels for order by-->
     <string-array name="settings_order_by_labels">
@@ -28,7 +28,7 @@
         <item>@string/settings_costa_rica_value</item>
     </string-array>
 
-    <!--settings labels for times-->
+    <!--settings labels for dates-->
     <string-array name="settings_dates_labels">
         <item>@string/settings_one_month_label</item>
         <item>@string/settings_one_quarter_label</item>
@@ -36,7 +36,7 @@
         <item>@string/settings_one_year_label</item>
     </string-array>
 
-    <!--settings values for location-->
+    <!--settings values for dates-->
     <string-array name="settings_dates_values">
         <item>@string/settings_one_month_value</item>
         <item>@string/settings_one_quarter_value</item>

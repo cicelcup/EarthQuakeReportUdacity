@@ -76,8 +76,8 @@ final class QuakeUtils {
             //Using the GET parameter
             urlConnection.setRequestMethod("GET");
             //Setting the times
-            urlConnection.setReadTimeout(15000 /*miliseconds*/);
-            urlConnection.setConnectTimeout(20000 /*miliseconds*/);
+            urlConnection.setReadTimeout(15000 /*milliseconds*/);
+            urlConnection.setConnectTimeout(20000 /*milliseconds*/);
             //Connecting
             urlConnection.connect();
 
@@ -90,6 +90,7 @@ final class QuakeUtils {
             }
 
         } catch (IOException e) {
+            //getting the time out exception and setting to true the timeOut variable
             if (e.getMessage().equals("timeout")) {
                 timeOut = true;
             }

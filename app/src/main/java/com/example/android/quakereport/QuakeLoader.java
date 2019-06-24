@@ -10,7 +10,7 @@ public class QuakeLoader extends AsyncTaskLoader<String> {
     private String mUrl;
 
     //Constructor
-    public QuakeLoader(@NonNull Context context, String url) {
+    QuakeLoader(@NonNull Context context, String url) {
         super(context);
         this.mUrl = url;
     }

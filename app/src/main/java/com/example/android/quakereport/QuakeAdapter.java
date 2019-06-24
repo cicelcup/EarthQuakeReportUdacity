@@ -55,6 +55,7 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         TextView textViewDate = currentView.findViewById(R.id.date);
         textViewDate.setText(formatDate(quake.getDate()));
 
+        //Set the time text
         TextView textViewTime = currentView.findViewById(R.id.time);
         textViewTime.setText(formatTime(quake.getDate()));
 
@@ -127,10 +128,12 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         String[] textLocation = new String[2];
         int positionOf = location.indexOf(LOCATION_SEPARATOR);
 
+        //Found the of separation and split the line in two
         if (positionOf != -1) {
             textLocation[0] = location.substring(0, positionOf + 2).trim();
             textLocation[1] = location.substring(positionOf + 2).trim();
-        } else {
+        } //Not found the location separation
+        else {
             textLocation[0] = "Near the";
             textLocation[1] = location.trim();
         }

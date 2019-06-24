@@ -15,7 +15,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,16 +33,18 @@ public class QuakeActivity extends AppCompatActivity implements
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
+    //progress bar showing while the search is doing
     ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quake_list);
+
         //progressBar of loading
         progressBar = findViewById(R.id.progress);
 
-        //Check if there's internet, else show the not connection text
+        //Check if there's internet to Load the Manager, else show the not connection text
         if (isNetworkAvailable()) {
             LoaderManager loaderManager = getSupportLoaderManager();
             loaderManager.initLoader(1, null, this);
@@ -70,7 +71,7 @@ public class QuakeActivity extends AppCompatActivity implements
 
         //Check if setting was pressed
         if (id == R.id.actions_settings) {
-            //Open a new activity
+            //Open a new activity for setting the configurations
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
@@ -81,6 +82,8 @@ public class QuakeActivity extends AppCompatActivity implements
     void updateList(String jsonQuakes) {
         //Empty View for not found list
         TextView emptyTextView = findViewById(R.id.empty_view);
+
+        //Check if the time out was trigger in the fetch process
         if (QuakeUtils.timeOut) {
             emptyTextView.setText(R.string.time_out);
             QuakeUtils.timeOut = false;
@@ -155,17 +158,21 @@ public class QuakeActivity extends AppCompatActivity implements
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder quakeQuery = baseUri.buildUpon();
 
+
+        //Building the URI with the parameters
+
         quakeQuery.appendQueryParameter("format", "geojson");
         quakeQuery.appendQueryParameter("limit", quakeNumber);
         quakeQuery.appendQueryParameter("minmag", minMag);
         quakeQuery.appendQueryParameter("orderby", orderBy);
 
-
+        //Central America Latitude and Longitude according the square in USGS Earthquake
         if (quakeLocation.equals(getString(R.string.settings_location_ca_value))) {
             quakeQuery.appendQueryParameter("minlatitude", "7.101");
             quakeQuery.appendQueryParameter("maxlatitude", "18.605");
             quakeQuery.appendQueryParameter("minlongitude", "-92.285");
             quakeQuery.appendQueryParameter("maxlongitude", "-77.036");
+            //Costa Rica Latitude and Longitude according the square in USGS Earthquake
         } else if (quakeLocation.equals(getString(R.string.settings_costa_rica_value))) {
             quakeQuery.appendQueryParameter("minlatitude", "7.961");
             quakeQuery.appendQueryParameter("maxlatitude", "11.297");
@@ -173,10 +180,12 @@ public class QuakeActivity extends AppCompatActivity implements
             quakeQuery.appendQueryParameter("maxlongitude", "-82.255");
         }
 
+        //Getting the current date
         Calendar calendar = Calendar.getInstance();
+        //Formatting the current date
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-
+        //According the option, reduce the amount of months of current date
         if (quakeDate.equals(getString(R.string.settings_one_quarter_value))) {
             calendar.add(calendar.MONTH, -3);
             quakeQuery.appendQueryParameter("starttime", simpleDateFormat.format(calendar.getTime()));
@@ -188,11 +197,11 @@ public class QuakeActivity extends AppCompatActivity implements
             quakeQuery.appendQueryParameter("starttime", simpleDateFormat.format(calendar.getTime()));
         }
 
-        Log.i("JAPM", quakeQuery.toString());
+        //Calling the QuakeLoader
         return new QuakeLoader(this, quakeQuery.toString());
     }
 
-    //Finish the loader
+    //Finish the loader and updating the list
     @Override
     public void onLoadFinished(@NonNull Loader<String> loader, String quakeList) {
         updateList(quakeList);
@@ -202,7 +211,7 @@ public class QuakeActivity extends AppCompatActivity implements
     public void onLoaderReset(@NonNull Loader<String> loader) {
     }
 
-    //Function that check if there's connection or not
+    //Function that check if there's internet connection or not
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

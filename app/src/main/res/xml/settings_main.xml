@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--Settings options-->
+<?xml version="1.0" encoding="utf-8"?><!--Settings options--><!--The setting menu with all configurations possibles-->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 

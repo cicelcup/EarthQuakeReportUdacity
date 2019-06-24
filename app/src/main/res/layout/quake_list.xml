@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--List for display the earthquake information-->
+<?xml version="1.0" encoding="utf-8"?><!--List for display the earthquake information--><!--Views for the items, for the empty answer, for the not internet answer and
+progress bar-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
