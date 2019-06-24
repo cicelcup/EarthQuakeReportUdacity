@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -138,7 +139,14 @@ public class QuakeActivity extends AppCompatActivity implements
         quakeQuery.appendQueryParameter("limit", quakeNumber);
         quakeQuery.appendQueryParameter("minmag", minMag);
         quakeQuery.appendQueryParameter("orderby", orderBy);
+        //quakeQuery.appendQueryParameter("minlatitude","7.101");
+        //quakeQuery.appendQueryParameter("maxlatitude","18.605");
+        //quakeQuery.appendQueryParameter("minlongitude","-92.285");
+        //quakeQuery.appendQueryParameter("maxlongitude","-77.036");
+        //quakeQuery.appendQueryParameter("starttime","2018-01-01");
+        //quakeQuery.appendQueryParameter("endtime","2018-12-31");
 
+        Log.i("JAPM", quakeQuery.toString());
         return new QuakeLoader(this, quakeQuery.toString());
     }
 

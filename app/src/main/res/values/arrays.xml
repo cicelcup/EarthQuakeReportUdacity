@@ -4,11 +4,13 @@
     <string-array name="settings_order_by_labels">
         <item>@string/settings_order_by_magnitude_label</item>
         <item>@string/settings_order_by_most_recent_label</item>
+        <item>@string/settings_order_by_oldest_label</item>
     </string-array>
 
     <!--settings values for order by-->
     <string-array name="settings_order_by_values">
         <item>@string/settings_order_by_magnitude_value</item>
         <item>@string/settings_order_by_most_recent_value</item>
+        <item>@string/settings_order_by_oldest_value</item>
     </string-array>
 </resources>
