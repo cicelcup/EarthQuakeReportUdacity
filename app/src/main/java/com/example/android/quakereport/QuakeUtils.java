@@ -19,6 +19,7 @@ final class QuakeUtils {
      * Tag for the log messages
      */
     private static final String LOG_TAG = QuakeUtils.class.getSimpleName();
+    static boolean timeOut = false;
 
     //Fetching the json
     static String fetchURL(String requestURL) {
@@ -75,8 +76,8 @@ final class QuakeUtils {
             //Using the GET parameter
             urlConnection.setRequestMethod("GET");
             //Setting the times
-            urlConnection.setReadTimeout(10000 /*miliseconds*/);
-            urlConnection.setConnectTimeout(15000 /*miliseconds*/);
+            urlConnection.setReadTimeout(15000 /*miliseconds*/);
+            urlConnection.setConnectTimeout(20000 /*miliseconds*/);
             //Connecting
             urlConnection.connect();
 
@@ -89,7 +90,10 @@ final class QuakeUtils {
             }
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Error retrieving the JSON result", e);
+            if (e.getMessage().equals("timeout")) {
+                timeOut = true;
+            }
+            Log.e(LOG_TAG, e.getMessage());
         } finally {
 
             //Closing the connection

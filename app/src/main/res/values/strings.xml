@@ -16,6 +16,7 @@
     <string name="app_name">Quake Report</string>
     <string name="no_open_connection">There is not network connection </string>
     <string name="not_quake_found">There is not earthquake found it</string>
+    <string name="time_out">Time out from server. Try one small search</string>
     <string name="not_internet_connection">There is not Internet Connection </string>
     <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
     <string name="settings_menu_item">Settings</string>

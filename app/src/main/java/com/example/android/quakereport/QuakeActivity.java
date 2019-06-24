@@ -81,7 +81,12 @@ public class QuakeActivity extends AppCompatActivity implements
     void updateList(String jsonQuakes) {
         //Empty View for not found list
         TextView emptyTextView = findViewById(R.id.empty_view);
-        emptyTextView.setText(R.string.not_quake_found);
+        if (QuakeUtils.timeOut) {
+            emptyTextView.setText(R.string.time_out);
+            QuakeUtils.timeOut = false;
+        } else {
+            emptyTextView.setText(R.string.not_quake_found);
+        }
 
         //Progress Bar not visible
         progressBar.setVisibility(View.GONE);
