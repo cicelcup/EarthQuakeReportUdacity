@@ -13,4 +13,34 @@
         <item>@string/settings_order_by_most_recent_value</item>
         <item>@string/settings_order_by_oldest_value</item>
     </string-array>
+
+    <!--settings labels for location-->
+    <string-array name="settings_location_labels">
+        <item>@string/settings_location_all_world_label</item>
+        <item>@string/settings_location_ca_label</item>
+        <item>@string/settings_costa_rica_label</item>
+    </string-array>
+
+    <!--settings values for location-->
+    <string-array name="settings_location_values">
+        <item>@string/settings_location_all_world_value</item>
+        <item>@string/settings_location_ca_value</item>
+        <item>@string/settings_costa_rica_value</item>
+    </string-array>
+
+    <!--settings labels for times-->
+    <string-array name="settings_dates_labels">
+        <item>@string/settings_one_month_label</item>
+        <item>@string/settings_one_quarter_label</item>
+        <item>@string/settings_one_half_label</item>
+        <item>@string/settings_one_year_label</item>
+    </string-array>
+
+    <!--settings values for location-->
+    <string-array name="settings_dates_values">
+        <item>@string/settings_one_month_value</item>
+        <item>@string/settings_one_quarter_value</item>
+        <item>@string/settings_one_half_value</item>
+        <item>@string/settings_one_year_value</item>
+    </string-array>
 </resources>

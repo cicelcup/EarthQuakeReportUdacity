@@ -23,11 +23,20 @@
     <string name="settings_title">Earthquake Settings</string>
 
 
-    <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30], label to show to the user, key to
+    <!-- Strings For Location Preference [CHAR LIMIT=30], label to show to the user, key to
     identify in the code and default value-->
     <string name="settings_location_label">Location</string>
     <string name="settings_location_key" translatable="false">location</string>
-    <string name="settings_location_default" translatable="false">all world</string>
+    <string name="settings_location_default" translatable="false">
+        @string/settings_location_all_world_value</string>
+
+
+    <!-- Strings For Dates Preference [CHAR LIMIT=30], label to show to the user, key to
+    identify in the code and default value-->
+    <string name="settings_dates_label">Dates</string>
+    <string name="settings_dates_key" translatable="false">dates</string>
+    <string name="settings_dates_default" translatable="false">
+        @string/settings_one_month_value</string>
 
     <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30], label to show to the user, key to
     identify in the code and default value-->
@@ -45,14 +54,15 @@
      in the code and default value-->
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
-    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_magnitude_value</string>
+    <string name="settings_order_by_default" translatable="false">
+        @string/settings_order_by_magnitude_value</string>
 
     <!-- Label for order-by magnitude option [CHAR LIMIT=20], label to show and value -->
     <string name="settings_order_by_magnitude_label">Magnitude</string>
     <string name="settings_order_by_magnitude_value" translatable="false">magnitude</string>
 
     <!-- Label for order-by most recent option [CHAR LIMIT=20], label to show and value -->
-    <string name="settings_order_by_most_recent_label">Most Recent</string>
+    <string name="settings_order_by_most_recent_label">Most recent</string>
     <string name="settings_order_by_most_recent_value" translatable="false">time</string>
 
     <!-- Label for order-by Oldest option [CHAR LIMIT=20], label to show and value -->
@@ -64,7 +74,27 @@
     <string name="settings_location_ca_value" translatable="false">central-america</string>
 
     <!-- Label for location option [CHAR LIMIT=20], label to show and value -->
-    <string name="settings_location_allworld_label">All World</string>
-    <string name="settings_location_allworld_value" translatable="false">all-world</string>
+    <string name="settings_location_all_world_label">All world</string>
+    <string name="settings_location_all_world_value" translatable="false">all-world</string>
+
+    <!-- Label for Costa Rica option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_costa_rica_label">Costa Rica</string>
+    <string name="settings_costa_rica_value" translatable="false">costa-rica</string>
+
+    <!-- Label for month option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_one_month_label">One month</string>
+    <string name="settings_one_month_value" translatable="false">one-month</string>
+
+    <!-- Label for quarter option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_one_quarter_label">One quarter</string>
+    <string name="settings_one_quarter_value" translatable="false">one-quarter</string>
+
+    <!-- Label for half option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_one_half_label">One half</string>
+    <string name="settings_one_half_value" translatable="false">one-half</string>
+
+    <!-- Label for year option [CHAR LIMIT=20], label to show and value -->
+    <string name="settings_one_year_label">One Year</string>
+    <string name="settings_one_year_value" translatable="false">one-year</string>
 
 </resources>

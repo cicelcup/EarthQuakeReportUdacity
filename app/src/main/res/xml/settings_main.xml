@@ -3,6 +3,13 @@
     android:title="@string/settings_title">
 
     <ListPreference
+        android:defaultValue="@string/settings_dates_default"
+        android:entries="@array/settings_dates_labels"
+        android:entryValues="@array/settings_dates_values"
+        android:key="@string/settings_dates_key"
+        android:title="@string/settings_dates_label" />
+
+    <ListPreference
         android:defaultValue="@string/settings_location_default"
         android:entries="@array/settings_location_labels"
         android:entryValues="@array/settings_location_values"

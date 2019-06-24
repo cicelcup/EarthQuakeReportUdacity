@@ -29,6 +29,10 @@ public class SettingsActivity extends AppCompatActivity {
             Preference location = findPreference(getString(R.string.settings_location_key));
             preferenceSummary(location);
 
+            //Get the dates preference
+            Preference dates = findPreference(getString(R.string.settings_dates_key));
+            preferenceSummary(dates);
+
             //Get the preference for minMag
             Preference minMag = findPreference(getString(R.string.settings_min_magnitude_key));
             preferenceSummary(minMag);

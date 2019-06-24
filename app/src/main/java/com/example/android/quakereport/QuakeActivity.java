@@ -24,6 +24,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class QuakeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<String> {
 
@@ -137,6 +140,12 @@ public class QuakeActivity extends AppCompatActivity implements
                 getString(R.string.settings_location_default)
         );
 
+        //Dates value
+        String quakeDate = sharedPreferences.getString(
+                getString(R.string.settings_dates_key),
+                getString(R.string.settings_dates_default)
+        );
+
         //Creating the URI to search the JSON
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
         Uri.Builder quakeQuery = baseUri.buildUpon();
@@ -146,16 +155,33 @@ public class QuakeActivity extends AppCompatActivity implements
         quakeQuery.appendQueryParameter("minmag", minMag);
         quakeQuery.appendQueryParameter("orderby", orderBy);
 
-        if (quakeLocation.equals("central-america")) {
+
+        if (quakeLocation.equals(getString(R.string.settings_location_ca_value))) {
             quakeQuery.appendQueryParameter("minlatitude", "7.101");
             quakeQuery.appendQueryParameter("maxlatitude", "18.605");
             quakeQuery.appendQueryParameter("minlongitude", "-92.285");
             quakeQuery.appendQueryParameter("maxlongitude", "-77.036");
+        } else if (quakeLocation.equals(getString(R.string.settings_costa_rica_value))) {
+            quakeQuery.appendQueryParameter("minlatitude", "7.961");
+            quakeQuery.appendQueryParameter("maxlatitude", "11.297");
+            quakeQuery.appendQueryParameter("minlongitude", "-86.188");
+            quakeQuery.appendQueryParameter("maxlongitude", "-82.255");
         }
 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        //quakeQuery.appendQueryParameter("starttime","2018-01-01");
-        //quakeQuery.appendQueryParameter("endtime","2018-12-31");
+
+        if (quakeDate.equals(getString(R.string.settings_one_quarter_value))) {
+            calendar.add(calendar.MONTH, -3);
+            quakeQuery.appendQueryParameter("starttime", simpleDateFormat.format(calendar.getTime()));
+        } else if (quakeDate.equals(getString(R.string.settings_one_half_value))) {
+            calendar.add(calendar.MONTH, -6);
+            quakeQuery.appendQueryParameter("starttime", simpleDateFormat.format(calendar.getTime()));
+        } else if (quakeDate.equals(getString(R.string.settings_one_year_value))) {
+            calendar.add(calendar.MONTH, -12);
+            quakeQuery.appendQueryParameter("starttime", simpleDateFormat.format(calendar.getTime()));
+        }
 
         Log.i("JAPM", quakeQuery.toString());
         return new QuakeLoader(this, quakeQuery.toString());
