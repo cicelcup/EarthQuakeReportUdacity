@@ -49,7 +49,7 @@ public class QuakeActivity extends AppCompatActivity implements
         //Check if there's internet to Load the Manager, else show the not connection text
         if (isNetworkAvailable()) {
             //Initiate the loader manager
-            LoaderManager loaderManager = getSupportLoaderManager();
+            LoaderManager loaderManager = LoaderManager.getInstance(this);
             loaderManager.initLoader(1, null, this);
         } else {
             //Set the not internet message and hide the progress Bar
