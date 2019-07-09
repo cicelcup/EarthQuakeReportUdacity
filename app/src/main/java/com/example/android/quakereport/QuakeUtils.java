@@ -19,24 +19,19 @@ final class QuakeUtils {
      * Tag for the log messages
      */
     private static final String LOG_TAG = QuakeUtils.class.getSimpleName();
+    //Variable to check if the time out was expired or not
     static boolean timeOut = false;
 
-    //Fetching the json
+    //Method for fetching the json
     static String fetchURL(String requestURL) {
 
-        /*Just for remember how to stop a thread for seconds
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-*/        //Create Url Object
+        //Create Url Object
         URL url = createURL(requestURL);
 
+        //initialize the jsonQuakes result to null
         String jsonQuakes = null;
 
-        //making the request
-
+        //making the request between try and catch to got possibles errors
         try {
             jsonQuakes = makeHttpRequest(url);
         } catch (IOException e) {
@@ -60,9 +55,11 @@ final class QuakeUtils {
         return url; //returning the correct URL
     }
 
+    //Make the request to the URL
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
+        //If there's not url, return a jsonResponse empty
         if (url == null) {
             return jsonResponse;
         }

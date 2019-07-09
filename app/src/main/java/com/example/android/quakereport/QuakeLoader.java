@@ -12,6 +12,7 @@ public class QuakeLoader extends AsyncTaskLoader<String> {
     //Constructor
     QuakeLoader(@NonNull Context context, String url) {
         super(context);
+        //assign the url to the mUrl variable
         this.mUrl = url;
     }
 
@@ -19,6 +20,7 @@ public class QuakeLoader extends AsyncTaskLoader<String> {
     @Override
     //Start the fetching process
     public String loadInBackground() {
+        //Check if the mURL is not null
         if (mUrl == null) {
             return null;
         }
@@ -26,7 +28,7 @@ public class QuakeLoader extends AsyncTaskLoader<String> {
         return QuakeUtils.fetchURL(mUrl);
     }
 
-    //Starting the process
+    //Starting the process (through force load method)
     @Override
     protected void onStartLoading() {
         forceLoad();

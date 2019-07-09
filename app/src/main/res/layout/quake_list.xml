@@ -4,12 +4,14 @@ progress bar-->
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- List view to show the quakes-->
     <ListView
         android:id="@+id/quake_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" />
 
+    <!-- Text view to show the not quakes message -->
     <TextView
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
@@ -19,12 +21,14 @@ progress bar-->
         android:gravity="center"
         android:textAppearance="?android:textAppearanceMedium" />
 
+    <!-- Progress Bar of loading the information-->
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
+    <!-- Text view for there's not internet connection-->
     <TextView
         android:id="@+id/not_internet"
         android:layout_width="wrap_content"

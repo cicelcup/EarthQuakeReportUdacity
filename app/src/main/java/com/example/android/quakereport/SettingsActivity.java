@@ -17,13 +17,13 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
     }
 
-    //Class for fragment
+    //Class for fragment to get the preferences of the app
     public static class QuakePreferenceFragment extends PreferenceFragment
             implements Preference.OnPreferenceChangeListener {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //Setting the preferences layout
+            //Setting the preferences layout from a xml file
             addPreferencesFromResource(R.xml.settings_main);
 
             //Get the location preference
@@ -48,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         @Override
-        //Setting the value of the preference
+        //Setting the value of the preference according the option chose by the user
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             String stringValue = newValue.toString();
             preference.setSummary(stringValue); //create the value below of the name
@@ -63,6 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             //get the value
             String preferenceString = preferences.getString(preference.getKey(), "");
+
             //Setting the value
             onPreferenceChange(preference, preferenceString);
         }

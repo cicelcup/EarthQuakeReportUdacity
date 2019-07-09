@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+//Adapter to load the information
 public class QuakeAdapter extends ArrayAdapter<Quake> {
 
     //Constructor for the earthquake
@@ -20,7 +21,7 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         super(context, 0, earthQuakeList);
     }
 
-    //get item of the adapter
+    //get item of the adapter (recycling the view)
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View currentView = convertView;
@@ -41,21 +42,21 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
         //Circle behind the magnitude
         GradientDrawable magnitudeCircle = (GradientDrawable) textViewMagnitude.getBackground();
 
-        //Check the color of the circle
+        //Check the color of the circle using the formatMagColor method
         magnitudeCircle.setColor(formatMagColor(quake.getMagnitude()));
 
-        //set the place text
+        //set the place text using the formatLocation method
         TextView textViewOffSet = currentView.findViewById(R.id.location_offset);
         textViewOffSet.setText(formatLocation(quake.getLocation())[0]);
 
         TextView textViewLocation = currentView.findViewById(R.id.location);
         textViewLocation.setText(formatLocation(quake.getLocation())[1]);
 
-        //set the date text
+        //set the date text using the formatDate method
         TextView textViewDate = currentView.findViewById(R.id.date);
         textViewDate.setText(formatDate(quake.getDate()));
 
-        //Set the time text
+        //Set the time text using the formatTime method
         TextView textViewTime = currentView.findViewById(R.id.time);
         textViewTime.setText(formatTime(quake.getDate()));
 
@@ -64,6 +65,7 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
     //color of background circle
     private int formatMagColor(float mag) {
+        //Check the magnitude and round to the low value
         int minMag = (int) Math.floor(mag);
         int color;
 
@@ -105,27 +107,33 @@ public class QuakeAdapter extends ArrayAdapter<Quake> {
 
     /*Format the magnitude*/
     private String formatMag(float mag) {
+        //Format the magnitude to a one digit after the point
         return String.format(Locale.US, "%.1f", mag);
     }
 
-    /*format the date*/
+    /*format the date using the Locale US format*/
     private String formatDate(Long dateQuake) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, YYYY", Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "MMM dd, YYYY", Locale.US);
         return dateFormat.format(new Date(dateQuake));
     }
 
-    /*format the time*/
+    /*format the time using the locale us format*/
     private String formatTime(Long dateQuake) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "hh:mm a", Locale.US);
         return dateFormat.format(new Date(dateQuake));
     }
 
     /*format the location*/
-
     private String[] formatLocation(String location) {
+        //variable of separation from the jSON
         final String LOCATION_SEPARATOR = "of";
 
+        //Separate the location in two strings
         String[] textLocation = new String[2];
+
+        //See if the separator is found it or not
         int positionOf = location.indexOf(LOCATION_SEPARATOR);
 
         //Found the of separation and split the line in two

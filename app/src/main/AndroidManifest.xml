@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--Activity for define the settings of the app -->
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title">
@@ -19,6 +20,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.quakereport.QuakeActivity" />
         </activity>
+
+        <!-- Main activity -->
         <activity android:name=".QuakeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

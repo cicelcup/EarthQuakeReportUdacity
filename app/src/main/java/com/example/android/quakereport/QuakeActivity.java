@@ -26,6 +26,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+//Implements the loader manager to load the information
 public class QuakeActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<String> {
 
@@ -39,6 +40,7 @@ public class QuakeActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //inflate the layout
         setContentView(R.layout.quake_list);
 
         //progressBar of loading
@@ -46,9 +48,11 @@ public class QuakeActivity extends AppCompatActivity implements
 
         //Check if there's internet to Load the Manager, else show the not connection text
         if (isNetworkAvailable()) {
+            //Initiate the loader manager
             LoaderManager loaderManager = getSupportLoaderManager();
             loaderManager.initLoader(1, null, this);
         } else {
+            //Set the not internet message and hide the progress Bar
             progressBar.setVisibility(View.GONE);
             TextView textView = findViewById(R.id.not_internet);
             textView.setVisibility(View.VISIBLE);
@@ -73,6 +77,7 @@ public class QuakeActivity extends AppCompatActivity implements
         if (id == R.id.actions_settings) {
             //Open a new activity for setting the configurations
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            //open the settings activity
             startActivity(settingsIntent);
             return true;
         }
@@ -83,7 +88,7 @@ public class QuakeActivity extends AppCompatActivity implements
         //Empty View for not found list
         TextView emptyTextView = findViewById(R.id.empty_view);
 
-        //Check if the time out was trigger in the fetch process
+        //Check if the time out was trigger in the fetch process. Set the empty view text
         if (QuakeUtils.timeOut) {
             emptyTextView.setText(R.string.time_out);
             QuakeUtils.timeOut = false;
@@ -160,7 +165,6 @@ public class QuakeActivity extends AppCompatActivity implements
 
 
         //Building the URI with the parameters
-
         quakeQuery.appendQueryParameter("format", "geojson");
         quakeQuery.appendQueryParameter("limit", quakeNumber);
         quakeQuery.appendQueryParameter("minmag", minMag);
@@ -197,7 +201,7 @@ public class QuakeActivity extends AppCompatActivity implements
             quakeQuery.appendQueryParameter("starttime", simpleDateFormat.format(calendar.getTime()));
         }
 
-        //Calling the QuakeLoader
+        //Calling the QuakeLoader using the query built it
         return new QuakeLoader(this, quakeQuery.toString());
     }
 
@@ -213,9 +217,11 @@ public class QuakeActivity extends AppCompatActivity implements
 
     //Function that check if there's internet connection or not
     private boolean isNetworkAvailable() {
+        //get the system service
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        //return true if the activeNetworkInfo is different than null and is connected
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
